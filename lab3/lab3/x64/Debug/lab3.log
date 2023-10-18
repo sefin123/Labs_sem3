@@ -1,10 +1,5 @@
-﻿  Computer.cpp
-C:\Users\spase\source\repos\lab3\lab3\Computer.cpp(8,2): error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\spase\source\repos\lab3\lab3\Computer.cpp(10,2): error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  Desktop.cpp
-C:\Users\spase\source\repos\lab3\lab3\Desktop.cpp(8,2): error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  Laptop.cpp
+﻿  Main.cpp
   Portable.cpp
   Tablet.cpp
-C:\Users\spase\source\repos\lab3\lab3\Tablet.cpp(8,2): error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   Generating Code...
+  lab3.vcxproj -> C:\Users\spase\source\repos\lab3\x64\Debug\lab3.exe

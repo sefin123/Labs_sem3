@@ -137,10 +137,12 @@
   <ItemGroup>
     <ClCompile Include="Computer.cpp" />
     <ClCompile Include="Desktop.cpp" />
+    <ClCompile Include="Header.h" />
     <ClCompile Include="Laptop.cpp" />
     <ClCompile Include="Monoblock.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Portable.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="Tablet.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

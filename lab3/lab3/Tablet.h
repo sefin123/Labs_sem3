@@ -7,5 +7,13 @@ public:
 
 	~Tablet();
 
-	Tablet(char* modemStr);
+	Tablet(char* modemStr, int batteryCharge, double screenDiagonal, char* brandStr, char* modelnameStr);
+
+	Tablet(const Tablet& other);
+
+	void printTablet();
+
+	void setModem(const char* newModem);
+
+	char* getModem();
 };

@@ -1,6 +1,5 @@
-#include <iostream>
-using namespace std;
-#define MAXSTRINGSIZE 256
+#pragma once
+#include "Header.h"
 
 class Computer {
 protected:
@@ -12,4 +11,14 @@ public:
 	~Computer();
 
 	Computer(char* brandStr, char* modelnameStr);
+
+	Computer(const Computer& other);
+
+	char* getBrand();
+
+	char* getModelName();
+
+	void setBrand(const char* newBrand);
+
+	void setModelName(const char* newModelName);
 };

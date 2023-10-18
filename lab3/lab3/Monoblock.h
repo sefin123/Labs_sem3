@@ -7,5 +7,13 @@ public:
 	
 	~Monoblock();
 
-	Monoblock(double screenDiagonalValue);
+	Monoblock(double screenDiagonalValue, char* bodyStr, char* brand, char* modelName);
+
+	Monoblock(const Monoblock& other);
+
+	void printMonoblock();
+
+	void setScreenDiagonal(double newScreenDiagonal);
+
+	double getScreenDiagonal();
 };

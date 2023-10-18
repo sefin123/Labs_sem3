@@ -8,5 +8,11 @@ public:
 
 	~Desktop();
 
-	Desktop(char* bodyStr);
+	Desktop(char* bodyStr, char* brand, char* modelName);
+
+	Desktop(const Desktop& other);
+
+	void setBody(const char* newBody);
+
+	char* getBody();
 };

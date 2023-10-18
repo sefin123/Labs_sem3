@@ -1,3 +1,4 @@
+#pragma once
 #include "Computer.h"
 
 class Portable : public Computer {
@@ -9,5 +10,15 @@ public:
 	
 	~Portable();
 
-	Portable(int batteryChargeValue, double screenDiagonalValue);
+	Portable(int batteryChargeValue, double screenDiagonalValue, char* brand, char* modelName);
+
+	Portable(const Portable& other);
+
+	void setbatteryCharge(int newBatteryCharge);
+
+	void setScreenDiagonal(double newScreenDiagonal);
+
+	double getScreenDiagonal();
+
+	int getBatteryCharge();
 };

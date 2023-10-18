@@ -7,5 +7,13 @@ public:
 
 	~Laptop();
 
-	Laptop(int numberOfKeys);
+	Laptop(int numberOfKeys, int batteryChargeValue, double screenDiagonalValue, char* brand, char* modelName);
+
+	Laptop(const Laptop& other);
+
+	void printLaptop();
+
+	void setNumberOfKeys(int newNumberOfKeys);
+
+	int setNumberOfKeys();
 };
