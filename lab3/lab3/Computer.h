@@ -8,7 +8,7 @@ protected:
 public:
 	Computer();
 
-	~Computer();
+	virtual ~Computer();
 
 	Computer(char* brandStr, char* modelnameStr);
 

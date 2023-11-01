@@ -6,7 +6,7 @@
 int main() {
 
 	int menuValue = MAGICNUMBER;
-
+	
 	while (menuValue != EXIT) {
 		showMenu();
 		menuValue = enterWithValidationForScope(MAXMENUVALUE);
@@ -17,30 +17,30 @@ int main() {
 			char modelName[MAXSTRINGSIZE];
 			char brand[MAXSTRINGSIZE];
 
-			cout << "Enter screen diagonal" << endl;
+			std::cout << "Enter screen diagonal" << endl;
 			cin >> screenDiagonal;
-			cout << "Enter body" << endl;
+			std::cout << "Enter body" << endl;
 			cin >> body;
-			cout << "Enter model name" << endl;
+			std::cout << "Enter model name" << endl;
 			cin >> modelName;
-			cout << "Enter brand" << endl;
+			std::cout << "Enter brand" << endl;
 			cin >> brand;
 
 			Monoblock monoblock(screenDiagonal, body, brand, modelName);
 			monoblock.printMonoblock();
-
+			Monoblock copyMonoblock(monoblock);
 			int choice;
-			cout << "1 if u wanna change parametr(2 to not)" << endl;
+			std::cout << "1 if u wanna change parametr(2 to not)" << endl;
 			choice = enterWithValidationForScope(3);
 			if (choice == 2)
 				continue;
 			bool change = true;
 			while (change) {
-				cout << "Which parametr u wanna change(5 to stop)" << endl;
-				cout << "1.screen diagonal" << endl;
-				cout << "2.body" << endl;
-				cout << "3.model name" << endl;
-				cout << "4.brand" << endl;
+				std::cout << "Which parametr u wanna change(5 to stop)" << endl;
+				std::cout << "1.screen diagonal" << endl;
+				std::cout << "2.body" << endl;
+				std::cout << "3.model name" << endl;
+				std::cout << "4.brand" << endl;
 				int changevalue = enterWithValidationForScope(6);
 				if (changevalue == 5)
 					change = false;
@@ -48,25 +48,26 @@ int main() {
 				if (changevalue == 1) {
 					double newScreenDiagonal;
 					cin >> newScreenDiagonal;
-					monoblock.setScreenDiagonal(newScreenDiagonal);
+					copyMonoblock.setScreenDiagonal(newScreenDiagonal);
 				}
 				if (changevalue == 2) {
 					char newBody[MAXSTRINGSIZE];
 					cin >> newBody;
-					monoblock.setBody(newBody);
+					copyMonoblock.setBody(newBody);
 				}
 				if (changevalue == 3) {
 					char newModelName[MAXSTRINGSIZE];
 					cin >> newModelName;
-					monoblock.setModelName(newModelName);
+					copyMonoblock.setModelName(newModelName);
 				}
 				if (changevalue == 4) {
 					char newBrand[MAXSTRINGSIZE];
 					cin >> newBrand;
-					monoblock.setBrand(newBrand);
+					copyMonoblock.setBrand(newBrand);
 				}
-				monoblock.printMonoblock();
+				copyMonoblock.printMonoblock();
 			}
+			
 		}
 		if (menuValue == 2) {
 			int numberOfKeys;
@@ -75,33 +76,33 @@ int main() {
 			char modelName[MAXSTRINGSIZE];
 			char brand[MAXSTRINGSIZE];
 
-			cout << "Enter number of keys" << endl;
+			std::cout << "Enter number of keys" << endl;
 			cin >> numberOfKeys;
-			cout << "Enter battery charge" << endl;
+			std::cout << "Enter battery charge" << endl;
 			cin >> batteryCharge;
-			cout << "Enter screen diagonal" << endl;
+			std::cout << "Enter screen diagonal" << endl;
 			cin >> screenDiagonal;
-			cout << "Enter model name" << endl;
+			std::cout << "Enter model name" << endl;
 			cin >> modelName;
-			cout << "Enter brand" << endl;
+			std::cout << "Enter brand" << endl;
 			cin >> brand;
 
 			Laptop laptop(numberOfKeys, batteryCharge, screenDiagonal, brand, modelName);
 			laptop.printLaptop();
-
+			Laptop copyLaptop(laptop);
 			int choice;
-			cout << "1 if u wanna change parametr(2 to not)" << endl;
+			std::cout << "1 if u wanna change parametr(2 to not)" << endl;
 			choice = enterWithValidationForScope(3);
 			if (choice == 2)
 				continue;
 			bool change = true;
 			while (change) {
-				cout << "Which parametr u wanna change(6 to stop)" << endl;
-				cout << "1.screen diagonal" << endl;
-				cout << "2.battery charge" << endl;
-				cout << "3.model name" << endl;
-				cout << "4.brand" << endl;
-				cout << "5.number of keys" << endl;
+				std::cout << "Which parametr u wanna change(6 to stop)" << endl;
+				std::cout << "1.screen diagonal" << endl;
+				std::cout << "2.battery charge" << endl;
+				std::cout << "3.model name" << endl;
+				std::cout << "4.brand" << endl;
+				std::cout << "5.number of keys" << endl;
 				int changevalue = enterWithValidationForScope(7);
 				if (changevalue == 6)
 					change = false;
@@ -109,29 +110,29 @@ int main() {
 				if (changevalue == 1) {
 					double newScreenDiagonal;
 					cin >> newScreenDiagonal;
-					laptop.setScreenDiagonal(newScreenDiagonal);
+					copyLaptop.setScreenDiagonal(newScreenDiagonal);
 				}
 				if (changevalue == 2) {
 					int newBatteryCharge;
 					cin >> newBatteryCharge;
-					laptop.setbatteryCharge(newBatteryCharge);
+					copyLaptop.setbatteryCharge(newBatteryCharge);
 				}
 				if (changevalue == 3) {
 					char newModelName[MAXSTRINGSIZE];
 					cin >> newModelName;
-					laptop.setModelName(newModelName);
+					copyLaptop.setModelName(newModelName);
 				}
 				if (changevalue == 4) {
 					char newBrand[MAXSTRINGSIZE];
 					cin >> newBrand;
-					laptop.setBrand(newBrand);
+					copyLaptop.setBrand(newBrand);
 				}
 				if (changevalue == 5) {
 					int newNumberOfKeys;
 					cin >> newNumberOfKeys;
-					laptop.setNumberOfKeys(newNumberOfKeys);
+					copyLaptop.setNumberOfKeys(newNumberOfKeys);
 				}
-				laptop.printLaptop();
+				copyLaptop.printLaptop();
 			}
 		}
 		if (menuValue == 3) {
@@ -142,31 +143,33 @@ int main() {
 			char modelName[MAXSTRINGSIZE];
 			char brand[MAXSTRINGSIZE];
 
-			cout << "Enter modem" << endl;
+			std::cout << "Enter modem" << endl;
 			cin >> modem;
-			cout << "Enter screen diagonal" << endl;
+			std::cout << "Enter screen diagonal" << endl;
 			cin >> screenDiagonal;
-			cout << "Enter battery charge" << endl;
+			std::cout << "Enter battery charge" << endl;
 			cin >> batteryCharge;
-			cout << "Enter model name" << endl;
+			std::cout << "Enter model name" << endl;
 			cin >> modelName;
-			cout << "Enter brand" << endl;
+			std::cout << "Enter brand" << endl;
 			cin >> brand;
 			Tablet tablet(modem, batteryCharge, screenDiagonal, brand, modelName);
 			tablet.printTablet();
+			Tablet copyTablet(tablet);
+
 			int choice;
-			cout << "1 if u wanna change parametr(2 to not)" << endl;
+			std::cout << "1 if u wanna change parametr(2 to not)" << endl;
 			choice = enterWithValidationForScope(3);
 			if (choice == 2)
 				continue;
 			bool change = true;
 			while (change) {
-				cout << "Which parametr u wanna change(6 to stop)" << endl;
-				cout << "1.screen diagonal" << endl;
-				cout << "2.battery charge" << endl;
-				cout << "3.model name" << endl;
-				cout << "4.brand" << endl;
-				cout << "5.modem" << endl;
+				std::cout << "Which parametr u wanna change(6 to stop)" << endl;
+				std::cout << "1.screen diagonal" << endl;
+				std::cout << "2.battery charge" << endl;
+				std::cout << "3.model name" << endl;
+				std::cout << "4.brand" << endl;
+				std::cout << "5.modem" << endl;
 				int changevalue = enterWithValidationForScope(7);
 				if (changevalue == 6)
 					change = false;
@@ -174,29 +177,29 @@ int main() {
 				if (changevalue == 1) {
 					double newScreenDiagonal;
 					cin >> newScreenDiagonal;
-					tablet.setScreenDiagonal(newScreenDiagonal);
+					copyTablet.setScreenDiagonal(newScreenDiagonal);
 				}
 				if (changevalue == 2) {
 					int newBatteryCharge;
 					cin >> newBatteryCharge;
-					tablet.setbatteryCharge(newBatteryCharge);
+					copyTablet.setbatteryCharge(newBatteryCharge);
 				}
 				if (changevalue == 3) {
 					char newModelName[MAXSTRINGSIZE];
 					cin >> newModelName;
-					tablet.setModelName(newModelName);
+					copyTablet.setModelName(newModelName);
 				}
 				if (changevalue == 4) {
 					char newBrand[MAXSTRINGSIZE];
 					cin >> newBrand;
-					tablet.setBrand(newBrand);
+					copyTablet.setBrand(newBrand);
 				}
 				if (changevalue == 5) {
 					char newModem[MAXSTRINGSIZE];
 					cin >> newModem;
-					tablet.setModem(newModem);
+					copyTablet.setModem(newModem);
 				}
-				tablet.printTablet();
+				copyTablet.printTablet();
 			}
 		}
 	}

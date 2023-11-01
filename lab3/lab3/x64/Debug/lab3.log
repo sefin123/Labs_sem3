@@ -1,4 +1,8 @@
-﻿  Main.cpp
+﻿  Computer.cpp
+  Desktop.cpp
+  Laptop.cpp
+  Main.cpp
+  Monoblock.cpp
   Portable.cpp
   Tablet.cpp
   Generating Code...
