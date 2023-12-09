@@ -1,7 +1,7 @@
 #include "Tablet.h"
 #include "Laptop.h"
 #include "Monoblock.h"
-#include "Header.h"
+#include "Exp.h"
 
 int main() {
 
@@ -17,16 +17,45 @@ int main() {
 			char modelName[MAXSTRINGSIZE];
 			char brand[MAXSTRINGSIZE];
 
+			Monoblock monoblock;
+
 			std::cout << "Enter screen diagonal" << endl;
-			cin >> screenDiagonal;
+			std::cin >> screenDiagonal;
+			try {
+				checkDouble(screenDiagonal);
+				monoblock.setScreenDiagonal(screenDiagonal);
+			}
+			catch (ExpInput& problem) {
+				problem.show();
+			}
 			std::cout << "Enter body" << endl;
 			cin >> body;
+			try {
+				checkChar(body);
+				monoblock.setBody(body);
+			}
+			catch (ExpInput& problem) {
+				problem.show();
+			}
 			std::cout << "Enter model name" << endl;
 			cin >> modelName;
+			try {
+				checkChar(modelName);
+				monoblock.setModelName(modelName);
+			}
+			catch (ExpInput& problem) {
+				problem.show();
+			}
 			std::cout << "Enter brand" << endl;
 			cin >> brand;
+			try {
+				checkChar(brand);
+				monoblock.setBrand(brand);
+			}
+			catch (ExpInput& problem) {
+				problem.show();
+			}
 
-			Monoblock monoblock(screenDiagonal, body, brand, modelName);
 			monoblock.printMonoblock();
 			Monoblock copyMonoblock(monoblock);
 			int choice;

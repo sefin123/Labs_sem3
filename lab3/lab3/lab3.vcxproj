@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="Computer.h" />
     <ClInclude Include="Desktop.h" />
+    <ClInclude Include="Exp.h" />
     <ClInclude Include="Laptop.h" />
     <ClInclude Include="Monoblock.h" />
     <ClInclude Include="Portable.h" />
@@ -137,6 +138,7 @@
   <ItemGroup>
     <ClCompile Include="Computer.cpp" />
     <ClCompile Include="Desktop.cpp" />
+    <ClCompile Include="Exp.cpp" />
     <ClCompile Include="Header.h" />
     <ClCompile Include="Laptop.cpp" />
     <ClCompile Include="Monoblock.cpp" />

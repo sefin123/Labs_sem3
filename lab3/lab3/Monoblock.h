@@ -16,4 +16,6 @@ public:
 	void setScreenDiagonal(double newScreenDiagonal);
 
 	double getScreenDiagonal();
+
+	const Monoblock& operator = (const Monoblock& other);
 };

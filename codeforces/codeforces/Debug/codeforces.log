@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\spase\source\repos\codeforces\codeforces\main.cpp(3,9): warning C4081: expected 'identifier'; found 'inline'
+  codeforces.vcxproj -> C:\Users\spase\source\repos\codeforces\Debug\codeforces.exe

@@ -1,88 +1,51 @@
 ﻿#include <iostream>
-#include "operatorString.hpp"
+#include <time.h>
+#pragma inline
 
-int main()
-{
-    char* firstStr = new char[256];
-    char* secondStr = new char[256];
-    cout << "First String: ";
-    cin.getline(firstStr, 256);
-    cout << "Second String: ";
-    cin.getline(secondStr, 256);
 
-    MyString firstData(firstStr);
-    MyString secondData(secondStr);
+using namespace std;
 
-    delete[] firstStr;
-    delete[] secondStr;
+int main() {
 
-    menu();
+	float ten = 10;
+	float* array = new float[10];
+	float buffer;
+	float result = 0;
 
-    int choice;
-    cout << "Choice: ";
-    validation(&choice, 7, -1);
+	for (int i = 0; i < 10; i++) {
+		do {
+			std::cout << "Enter float number(array[" << i << "]): ";
+			std::cin >> buffer;
+			if (std::cin.good()) {
+				array[i] = buffer;
+				break;
+			}
+			else {
+				rewind(stdin);
+				std::cin.clear();
+			}
+		} while (true);
+	}
 
-    switch (choice)
-    {
-    case 1:
-    {
-        secondData = firstData;
-        cout << "Second Data: " << secondData.getStr() << endl;
-        break;
 
-    }
-    case 2:
-    {
-        MyString newData = firstData + secondData;
-        cout << "New Data: " << newData.getStr() << endl;
-        break;
-    }
-    case 3:
-    {
-        firstData += secondData;
-        cout << firstData.getStr() << endl;
-        break;
-    }
-    case 4:
-    {
-        if (firstData == secondData)
-            cout << "True" << endl;
-        else
-            cout << "False" << endl;
-        break;
-    }
-    case 5:
-    {
-        if (firstData != secondData)
-            cout << "True" << endl;
-        else
-            cout << "False" << endl;
-        break;
-    }
-    case 6:
-    {
-        int i, j;
-        cout << "Enter index of symbol First String: ";
-        validation(&i, (int)strlen(firstData.getStr()) - 1, -1);
-        cout << firstData[i] << endl;
-        cout << "Enter index of symbol Second String: ";
-        validation(&j, (int)strlen(secondData.getStr()) - 1, -1);
-        cout << secondData[j] << endl;
-        break;
-    }
-    case 7:
-    {
-        int start, end;
-        cout << "Start index of 1 string: ";
-        validation(&start, (int)strlen(firstData.getStr()) - 1, -1);
-        cout << "End index of 1 string: ";
-        validation(&end, (int)strlen(firstData.getStr()) - 1, start);
-        cout << "First String: " << firstData(start, end).getStr() << endl;
-        break;
-    }
+	_asm {
+		xor ecx, ecx
+		mov cx, 10
+		finit
+		mov eax, array
+		fld ten
+		fld result
+		start :
+		fadd[eax]
+			add eax, 4   
+			cmp cx, 0
+			dec cx
+			jnz start
 
-    };
+			fdiv st(0), st(1)
+			fst result
+	}
+	cout << "result:" << result << endl;
 
-    return 0;
+	return 0;
 }
-

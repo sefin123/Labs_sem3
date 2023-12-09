@@ -30,6 +30,16 @@ void Monoblock::setScreenDiagonal(double newScreenDiagonal) {
 	this->screenDiagonal = newScreenDiagonal;
 }
 
+const Monoblock& Monoblock::operator =(const Monoblock& other) {
+	strcpy_s(this->body, other.body);
+	strcpy_s(this->brand, other.brand);
+	strcpy_s(this->modelName, other.modelName);
+	this->screenDiagonal = other.screenDiagonal;
+
+	return *this;
+}
+
+
 double Monoblock::getScreenDiagonal() {
 	return this->screenDiagonal;
 }
