@@ -38,11 +38,14 @@ public:
 
     void medianFilter(const int ratio);
     void gammaCorrection(const double gamma);
+    void drawMouseLine(const QPoint &endPoint);
+    void replaceImage(const QImage &image);
 
     DrawingArea(QUndoStack *undoStack, QWidget *parent = 0);
     ~DrawingArea();
 
 public slots:
+    void setDrawPen();
     void setCreateEllipse();
     void setCreateRectangle();
     void setCreateLine();
@@ -65,7 +68,11 @@ private:
     int _penWidth;
     QPoint lastPoint;
     QColor _penColor;
-    Shape::ShapePointer _currentShape;
+    std::string  _currentShape;
+    bool isDrawing;
+    QPoint prev;
+    QImage _trashImage;
+    QImage _afterDrawingImage;
 
     static const QSize _startSize;
     static const QSize _maxSize;

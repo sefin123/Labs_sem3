@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->_drawToolBar = createToolBar();
     addToolBar(Qt::TopToolBarArea, this->_drawToolBar);
 
-    setWindowIcon(QIcon(":/icons/MainIcon.ico"));
+    setWindowIcon(QIcon("D:/qt projects/paintCourse/icons/MainIcon.ico"));
 
     this->_scrollingArea = new QScrollArea;
     this->_scrollingArea->setWidget(this->_workingSpace);
@@ -48,6 +48,8 @@ MainWindow::~MainWindow()
     delete this->_correctionAct;
     delete this->_filtrateAct;
     delete this->_aboutAct;
+    delete this->_drawPen;
+
 
     foreach (QAction *action, _saveAsActs)
         delete action;
@@ -82,6 +84,11 @@ void MainWindow::createNew()
 {
     if (maybeSave())
         this->_workingSpace->createNewImage();
+}
+
+void MainWindow::drawingByPen()
+{
+    this->_workingSpace->setDrawPen();
 }
 
 void MainWindow::open()
@@ -227,32 +234,32 @@ bool MainWindow::maybeSave()
 
 void MainWindow::createDrawActionGruop()
 {
-    QAction *ellipseAct = new QAction(QIcon(":/icons/ellipse.ico"), "&Ellipse");
+    QAction *ellipseAct = new QAction(QIcon("D:/qt projects/paintCourse/icons/ellipse.ico"), "&Ellipse");
     connect(ellipseAct, SIGNAL(triggered()), _workingSpace, SLOT(setCreateEllipse()));
     ellipseAct->setCheckable(true);
     ellipseAct->setActionGroup(&_drawActionGroup);
 
-    QAction *rectangleAct = new QAction(QIcon(":/icons/rectangle.ico"), "&Rectangle");
+    QAction *rectangleAct = new QAction(QIcon("D:/qt projects/paintCourse/icons/rectangle.ico"), "&Rectangle");
     connect(rectangleAct, SIGNAL(triggered()), _workingSpace, SLOT(setCreateRectangle()));
     rectangleAct->setCheckable(true);
     rectangleAct->setActionGroup(&_drawActionGroup);
 
-    QAction *lineAct = new QAction(QIcon(":/icons/line.ico"), "&Line");
+    QAction *lineAct = new QAction(QIcon("D:/qt projects/paintCourse/icons/line.ico"), "&Line");
     connect(lineAct, SIGNAL(triggered()), _workingSpace, SLOT(setCreateLine()));
     lineAct->setCheckable(true);
     lineAct->setActionGroup(&_drawActionGroup);
 
-    QAction *curveAct = new QAction(QIcon(":/icons/curve.ico"), "&Curve");
+    QAction *curveAct = new QAction(QIcon("D:/qt projects/paintCourse/icons/curve.ico"), "&Curve");
     connect(curveAct, SIGNAL(triggered()), _workingSpace, SLOT(setCreateCurve()));
     curveAct->setCheckable(true);
     curveAct->setActionGroup(&_drawActionGroup);
 
-    QAction *eraserAct = new QAction(QIcon(":/icons/eraser.ico"), "&Eraser");
+    QAction *eraserAct = new QAction(QIcon("D:/qt projects/paintCourse/icons/eraser.ico"), "&Eraser");
     connect(eraserAct, SIGNAL(triggered()), _workingSpace, SLOT(setCreateEraser()));
     eraserAct->setCheckable(true);
     eraserAct->setActionGroup(&_drawActionGroup);
 
-    QAction *fillAct = new QAction(QIcon(":/icons/fill.ico"), "&Fill");
+    QAction *fillAct = new QAction(QIcon("D:/qt projects/paintCourse/icons/fill.ico"), "&Fill");
     connect(fillAct, SIGNAL(triggered()), _workingSpace, SLOT(setCreateFilledShape()));
     fillAct->setCheckable(true);
     fillAct->setActionGroup(&_drawActionGroup);
@@ -286,6 +293,9 @@ void MainWindow::createActions()
     _newAct = new QAction("Create New...", this);
     _newAct->setShortcuts(QKeySequence::New);
     connect(_newAct, SIGNAL(triggered()), this, SLOT(createNew()));
+
+    _drawPen = new QAction("Drawing with pen", this);
+    connect(_newAct, SIGNAL(triggered()), this, SLOT(drawingByPen()));
 
     _openAct = new QAction("&Open...", this);
     _openAct->setShortcuts(QKeySequence::Open);
@@ -358,6 +368,8 @@ void MainWindow::createMenus()
         _saveAsMenu->addAction(action);
 
     _fileMenu = new QMenu("&File", this);
+
+    _fileMenu->addAction(_drawPen);
     _fileMenu->addAction(_newAct);
     _fileMenu->addAction(_openAct);
     _fileMenu->addMenu(_saveAsMenu);

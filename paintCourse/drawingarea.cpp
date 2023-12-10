@@ -1,5 +1,5 @@
 #include "DrawingArea.h"
-//#include "CreateFunctions.h"
+#include "CreateFunctions.h"
 
 #include "ImageSizeException.h"
 
@@ -19,12 +19,14 @@ const QSize DrawingArea::_maxSize(5000,5000);
 DrawingArea::DrawingArea(QUndoStack *undoStack, QWidget *parent) :
     QWidget(parent),
     _undoStack(undoStack),
-    _penWidth(1),
+    _penWidth(2),
     _penColor(Qt::black),
-    _currentShape(nullptr)
+    _currentShape("1")
+
 {
-//    const QImage _image = QImage();
-    //ResizeCommand(this, &this->_image, _startSize).redo();
+    const QImage _image = QImage();
+    isDrawing = false;
+    ResizeCommand(this, &this->_image, _startSize).redo();
 }
 
 DrawingArea::~DrawingArea()
@@ -68,6 +70,12 @@ void DrawingArea::createNewImage()
     this->_undoStack->clear();
 }
 
+
+void DrawingArea::setDrawPen()
+{
+    this->isDrawing = true;
+}
+
 bool DrawingArea::openImage(const QString &fileName)
 {
     QImage loadedImage;
@@ -87,6 +95,11 @@ bool DrawingArea::openImage(const QString &fileName)
 
     return true;
 }
+void DrawingArea::replaceImage(const QImage &image)
+{
+    this->_image = image;
+}
+
 
 bool DrawingArea::saveImage(const QString &fileName, const char *fileFormat)
 {
@@ -111,33 +124,35 @@ void DrawingArea::setPenWidth(int newWidth)
 
 void DrawingArea::setCreateEllipse()
 {
-    //this->_createShape(_image);
-    //this->_createShape = &createEllipse;
+    this->_currentShape = "ellipse";
 }
 
 void DrawingArea::setCreateRectangle()
 {
-    //this->_createShape = &createRectangle;
+    this->_currentShape = "rectangle";
 }
 
 void DrawingArea::setCreateLine()
 {
     //this->_createShape = &createLine;
+    this->_currentShape = "line";
 }
 
 void DrawingArea::setCreateCurve()
 {
     //this->_createShape = &createCurve;
+    this->_currentShape = "curve";
 }
 
 void DrawingArea::setCreateEraser()
 {
-    //this->_createShape = &createEraser;
+    this->_penColor = Qt::white;
 }
 
 void DrawingArea::setCreateFilledShape()
 {
     //this->_createShape = &createFilledShape;
+    this->_currentShape = "filledShape";
 }
 
 QColor DrawingArea::getPenColor()
@@ -159,57 +174,66 @@ void DrawingArea::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        this->_currentShape = _createShape(&this->_image,
-                                           event->pos(),
-                                           this->_penWidth,
-                                           this->_penColor);
-        //update(this->_currentShape->rect());
-
-//        QPainter painter(&this->_image);
-
-
-//        painter.setPen(QPen(this->_penColor, this->_penWidth, Qt::SolidLine, Qt::RoundCap,
-//                            Qt::RoundJoin));
-
-//        painter.drawLine(lastPoint, event->pos());
-//        //painter.drawLine(0, 0, 200, 200);
-
-//        int rad = (_penWidth / 2) + 2;
-
-
-//        update(QRect(lastPoint, event->pos()).normalized()
-//                   .adjusted(-rad, -rad, +rad, +rad));
-
-
-//        lastPoint = event->pos();
-
-//        //update(QRect(lastPoint,  event->pos()).normalized());
-
-
-
+//        if(this->_currentShape == "ellipse") {
+//                return;
+//        }
+//        if(this->_currentShape == 'rectangle') {
+//                //drawElipse();
+//                return;
+//        }
+//        if(this->_currentShape == 'poligon') {
+//                //drawElipse();
+//                return;
+//        }
+        lastPoint = event->pos();
+        this->isDrawing = true;
+        _afterDrawingImage = _image.copy();
     }
+
 }
+
+void DrawingArea::drawMouseLine(const QPoint &endPoint){
+
+    QPainter painter(&this->_image);
+    painter.setPen(QPen(_penColor, _penWidth, Qt::SolidLine, Qt::RoundCap,
+                        Qt::RoundJoin));
+
+    painter.drawLine(lastPoint, endPoint);
+
+    int rad = (_penWidth / 2) + 2;
+    update(QRect(lastPoint, endPoint).normalized()
+               .adjusted(-rad, -rad, +rad, +rad));
+    lastPoint = endPoint;
+}
+
+
 
 void DrawingArea::mouseMoveEvent(QMouseEvent *event)
 {
-    if ((event->buttons() & Qt::LeftButton) && this->_currentShape)
-    {
+    if(this->isDrawing) {
 
-        const QRect prevRect = this->_currentShape->rect();
-        this->_currentShape->update(event->pos());
-
-        update(this->_currentShape->rect().united(prevRect));
+        drawMouseLine(event->pos());
     }
 }
 
 void DrawingArea::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton && this->_currentShape)
-    {
-        this->_undoStack->push(new DrawCommand(this, &this->_image,
-                                               this->_currentShape));
-        this->_currentShape = nullptr;
+
+    if(event->button() == Qt::LeftButton && this->isDrawing) {
+        this->isDrawing = false;
+        lastPoint = event->pos();
+        update();
+
+        this->_undoStack->push(new DrawCommand(this, &this->_image, _afterDrawingImage, _image.copy()));
+
     }
+
+//    if (event->button() == Qt::LeftButton && this->_currentShape)
+//    {
+////        this->_undoStack->push(new DrawCommand(this, &this->_image,
+////                                               this->_currentShape));
+//        this->_currentShape = nullptr;
+//    }
 }
 
 void DrawingArea::paintEvent(QPaintEvent *event)
@@ -221,8 +245,8 @@ void DrawingArea::paintEvent(QPaintEvent *event)
 
     painter.drawImage(paintRect, this->_image, paintRect);
 
-    if (this->_currentShape)
-        this->_currentShape->draw(painter);
+//    if (this->_currentShape)
+//        this->_currentShape->draw(painter);
 }
 
 } // namespace Draw

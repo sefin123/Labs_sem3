@@ -31,13 +31,13 @@ void ResizeCommand::redo()
 
     QImage newImage(this->_newSize, QImage::Format_ARGB32);
     newImage.fill(Qt::white);
-//    *this->_image = this->_image->scaled(this->_newSize);
+    *this->_image = this->_image->scaled(this->_newSize);
     QPainter painter(&newImage);
     painter.drawImage(QPoint(0, 0), *this->_image);
     *this->_image = newImage;
 
-//    this->_drawingArea->setGeometry(this->_image->rect());
-//    this->_drawingArea->update();
+    this->_drawingArea->setGeometry(this->_image->rect());
+    this->_drawingArea->update();
 }
 
 ResizeCommand::~ResizeCommand()

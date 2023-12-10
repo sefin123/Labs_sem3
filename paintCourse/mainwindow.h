@@ -28,6 +28,7 @@ private slots:
     void save();
     void createNew();
 
+    void drawingByPen();
     void penColor();
     void penWidth();
 
@@ -73,6 +74,8 @@ private:
     QAction *_correctionAct;
     QAction *_filtrateAct;
     QAction *_aboutAct;
+
+    QAction *_drawPen;
 
     QActionGroup _drawActionGroup;
     QActionGroup _effectsActionGroup;

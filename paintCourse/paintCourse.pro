@@ -10,7 +10,6 @@ CONFIG += c++17
 
 SOURCES += \
     correctioncommand.cpp \
-    createfunctions.cpp \
     curve.cpp \
     drawcommand.cpp \
     drawingarea.cpp \
@@ -29,7 +28,6 @@ SOURCES += \
 
 HEADERS += \
     correctioncommand.h \
-    createfunctions.h \
     curve.h \
     drawcommand.h \
     drawingarea.h \

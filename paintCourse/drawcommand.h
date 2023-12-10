@@ -15,16 +15,14 @@ public:
     virtual void undo() override;
     virtual void redo() override;
 
-    explicit DrawCommand(QWidget *drawingArea, QImage *image,
-                         Shape::ShapePointer shape);
+    explicit DrawCommand(QWidget *drawingArea, QImage *image, QImage _afterDrawingImage, QImage _beforeDrawingImage);
     ~DrawCommand();
 
 private:
     QWidget *_drawingArea;
     QImage *_image;
-
-    QImage _undoImage;
-    Shape::ShapePointer _shape;
+    QImage _afterDrawingImage;
+    QImage _beforeDrawingImage;
 };
 
 } // namespace Draw
