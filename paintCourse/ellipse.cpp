@@ -4,7 +4,7 @@ namespace Draw
 {
 
 Ellipse::Ellipse(QImage *image, const QPoint &eventPoint, int penWidth, const QColor &penColor) :
-    Shape(image, penWidth, penColor), _rectangle(eventPoint, eventPoint)
+    Shape(image, penWidth, penColor), _rectangle(eventPoint.x(), eventPoint.y(), 50 ,50)
 {
 }
 
@@ -16,13 +16,10 @@ void Ellipse::draw(QPainter &painter)
 {
     if (!this->_rectangle.isNull())
     {
-        const QPen prevPen = painter.pen();
-
         painter.setPen(QPen(this->getPenColor(), this->getPenWidth(),
                             Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
         painter.drawEllipse(this->_rectangle);
-        painter.setPen(prevPen);
     }
 }
 

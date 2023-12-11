@@ -28,7 +28,6 @@ private slots:
     void save();
     void createNew();
 
-    void drawingByPen();
     void penColor();
     void penWidth();
 

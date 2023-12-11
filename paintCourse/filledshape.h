@@ -14,7 +14,6 @@ public:
 
     FilledShape(QImage* image,
                 const QPoint &eventPoint,
-                int penWidth,
                 const QColor& penColor);
     ~FilledShape();
 private:

@@ -86,11 +86,6 @@ void MainWindow::createNew()
         this->_workingSpace->createNewImage();
 }
 
-void MainWindow::drawingByPen()
-{
-    this->_workingSpace->setDrawPen();
-}
-
 void MainWindow::open()
 {
     if (maybeSave())
@@ -234,6 +229,11 @@ bool MainWindow::maybeSave()
 
 void MainWindow::createDrawActionGruop()
 {
+    QAction *penAct = new QAction(QIcon("D:/qt projects/paintCourse/icons/pen.ico"), "&Pen");
+    connect(penAct, SIGNAL(triggered()), _workingSpace, SLOT(setCreatePen()));
+    penAct->setCheckable(true);
+    penAct->setActionGroup(&_drawActionGroup);
+
     QAction *ellipseAct = new QAction(QIcon("D:/qt projects/paintCourse/icons/ellipse.ico"), "&Ellipse");
     connect(ellipseAct, SIGNAL(triggered()), _workingSpace, SLOT(setCreateEllipse()));
     ellipseAct->setCheckable(true);
@@ -248,11 +248,6 @@ void MainWindow::createDrawActionGruop()
     connect(lineAct, SIGNAL(triggered()), _workingSpace, SLOT(setCreateLine()));
     lineAct->setCheckable(true);
     lineAct->setActionGroup(&_drawActionGroup);
-
-    QAction *curveAct = new QAction(QIcon("D:/qt projects/paintCourse/icons/curve.ico"), "&Curve");
-    connect(curveAct, SIGNAL(triggered()), _workingSpace, SLOT(setCreateCurve()));
-    curveAct->setCheckable(true);
-    curveAct->setActionGroup(&_drawActionGroup);
 
     QAction *eraserAct = new QAction(QIcon("D:/qt projects/paintCourse/icons/eraser.ico"), "&Eraser");
     connect(eraserAct, SIGNAL(triggered()), _workingSpace, SLOT(setCreateEraser()));
@@ -293,9 +288,6 @@ void MainWindow::createActions()
     _newAct = new QAction("Create New...", this);
     _newAct->setShortcuts(QKeySequence::New);
     connect(_newAct, SIGNAL(triggered()), this, SLOT(createNew()));
-
-    _drawPen = new QAction("Drawing with pen", this);
-    connect(_newAct, SIGNAL(triggered()), this, SLOT(drawingByPen()));
 
     _openAct = new QAction("&Open...", this);
     _openAct->setShortcuts(QKeySequence::Open);
@@ -369,7 +361,6 @@ void MainWindow::createMenus()
 
     _fileMenu = new QMenu("&File", this);
 
-    _fileMenu->addAction(_drawPen);
     _fileMenu->addAction(_newAct);
     _fileMenu->addAction(_openAct);
     _fileMenu->addMenu(_saveAsMenu);

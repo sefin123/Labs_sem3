@@ -35,21 +35,22 @@ public:
 
     void flip(bool horizontal, bool vertical);
     void rotate(qreal deg);
-
+    void drawEllipses(QMouseEvent *event);
+    void drawRectangle(QMouseEvent *event);
+    void ColorPicker(QMouseEvent *event);
+    void fillShape(QMouseEvent *event);
     void medianFilter(const int ratio);
     void gammaCorrection(const double gamma);
     void drawMouseLine(const QPoint &endPoint);
-    void replaceImage(const QImage &image);
 
     DrawingArea(QUndoStack *undoStack, QWidget *parent = 0);
     ~DrawingArea();
 
 public slots:
-    void setDrawPen();
+    void setCreatePen();
     void setCreateEllipse();
     void setCreateRectangle();
     void setCreateLine();
-    void setCreateCurve();
     void setCreateEraser();
     void setCreateFilledShape();
 
@@ -68,11 +69,13 @@ private:
     int _penWidth;
     QPoint lastPoint;
     QColor _penColor;
+    QColor _oldPenColor;
     std::string  _currentShape;
     bool isDrawing;
     QPoint prev;
     QImage _trashImage;
     QImage _afterDrawingImage;
+    bool _isEraser;
 
     static const QSize _startSize;
     static const QSize _maxSize;

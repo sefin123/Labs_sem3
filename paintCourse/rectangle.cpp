@@ -5,7 +5,7 @@ namespace Draw
 
 Rectangle::Rectangle(QImage *image,const QPoint &topLeft,
                      int penWidth, const QColor &penColor) :
-    Shape(image ,penWidth, penColor), _rectangle(topLeft, topLeft)
+    Shape(image ,penWidth, penColor), _rectangle(topLeft.x(), topLeft.y(), 25, 25)
 {
 }
 

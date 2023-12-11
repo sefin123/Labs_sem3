@@ -43,8 +43,7 @@ FilledShape::floodFill(const QPoint &pos, const QRgb &newColor)
     return modified;
 }
 
-FilledShape::FilledShape(QImage* image, const QPoint &topLeft,
-                         int penWidth, const QColor &penColor) :
+FilledShape::FilledShape(QImage* image, const QPoint &topLeft, const QColor &penColor) :
     Shape(image, 1, penColor),
     _points(FilledShape::floodFill(topLeft, penColor.rgb())),
     _rectangle(topLeft, topLeft)
