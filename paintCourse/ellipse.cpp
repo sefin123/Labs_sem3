@@ -4,7 +4,7 @@ namespace Draw
 {
 
 Ellipse::Ellipse(QImage *image, const QPoint &eventPoint, int penWidth, const QColor &penColor) :
-    Shape(image, penWidth, penColor), _rectangle(eventPoint.x(), eventPoint.y(), 50 ,50)
+    Shape(image, penWidth, penColor), _rectangle(eventPoint.x(), eventPoint.y(), 100 ,100)
 {
 }
 

@@ -113,17 +113,17 @@ void DrawingArea::setPenWidth(int newWidth)
 
 void DrawingArea::setCreatePen()
 {
-    this->_currentShape = "pen";
+    this->_currentShape = "Pen";
 }
 
 void DrawingArea::setCreateEllipse()
 {
-    this->_currentShape = "ellipse";
+    this->_currentShape = "Ellipse";
 }
 
 void DrawingArea::setCreateRectangle()
 {
-    this->_currentShape = "rectangle";
+    this->_currentShape = "Rectangle";
 }
 
 void DrawingArea::setCreateLine()
@@ -133,7 +133,7 @@ void DrawingArea::setCreateLine()
 
 void DrawingArea::setCreateEraser()
 {
-    this->_currentShape = "pen";
+    this->_currentShape = "Eraser";
     this->_oldPenColor = this->_penColor;
     this->_penColor = Qt::white;
     this->_isEraser = true;
@@ -141,7 +141,7 @@ void DrawingArea::setCreateEraser()
 
 void DrawingArea::setCreateFilledShape()
 {
-    this->_currentShape = "filledShape";
+    this->_currentShape = "FilledShape";
 }
 
 QColor DrawingArea::getPenColor()
@@ -159,54 +159,43 @@ QSize DrawingArea::getImageSize()
     return this->_image.size();
 }
 
-void DrawingArea::drawEllipses(QMouseEvent *event)
+void DrawingArea::toggleEraserMode()
 {
     if(this->_isEraser)
     {
-    this->_penColor = this->_oldPenColor;
+        this->_penColor = this->_oldPenColor;
         this->_isEraser = false;
     }
-    QPainter painter(&this->_image);
-    Ellipse ellipse(&this->_image, event->pos(), this->_penWidth, this->_penColor);
-    ellipse.draw(painter);
-    /*painter.setPen(QPen(this->getPenColor(), this->getPenWidth(),
-                        Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+}
 
-    painter.drawEllipse(event->pos(), 100, 100);*/
+void DrawingArea::drawEllipses(QMouseEvent *event)
+{
+    toggleEraserMode();
+    QPainter painter(&this->_image);
+    Ellipse ellipse(&this->_image, event->pos(), this->getPenWidth(), this->getPenColor());
+    ellipse.draw(painter);
 
     update();
 }
 
 void DrawingArea::drawRectangle(QMouseEvent *event)
 {
-    if(this->_isEraser)
-    {
-        this->_penColor = this->_oldPenColor;
-        this->_isEraser = false;
-    }
+    toggleEraserMode();
     QPainter painter(&this->_image);
-    Rectangle rect(&this->_image, event->pos(), this->_penWidth, this->_penColor);
+    Rectangle rect(&this->_image, event->pos(), this->getPenWidth(), this->getPenColor());
     rect.draw(painter);
-//    painter.setPen(QPen(this->getPenColor(), this->getPenWidth(),
-//                        Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-
-//    painter.drawRect(event->pos().x(), event->pos().y(), 15, 15);
 
     update();
 }
 
 void DrawingArea::ColorPicker(QMouseEvent *event)
 {
-    this->_penColor = this->_image.pixelColor(event->pos().rx(), event->pos().rx());//<-color picker
+    this->_penColor = this->_image.pixelColor(event->pos());
 }
 
 void DrawingArea::fillShape(QMouseEvent *event)
 {
-    if(this->_isEraser)
-    {
-        this->_penColor = this->_oldPenColor;
-        this->_isEraser = false;
-    }
+    toggleEraserMode();
     FilledShape fillShape(&this->_image, event->pos(), this->_penColor);
     QPainter painter(&this->_image);
     fillShape.draw(painter);
@@ -217,11 +206,11 @@ void DrawingArea::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        if(this->_currentShape == "ellipse")
+        if(this->_currentShape == "Ellipse")
         {
-            this->drawEllipses(event);
+            return this->drawEllipses(event);
         }
-        if(this->_currentShape == "rectangle")
+        if(this->_currentShape == "Rectangle")
         {
             return this->drawRectangle(event);
         }
@@ -229,7 +218,7 @@ void DrawingArea::mousePressEvent(QMouseEvent *event)
         {
             return this->ColorPicker(event);
         }
-        if(this->_currentShape == "filledShape")
+        if(this->_currentShape == "FilledShape")
         {
             return this->fillShape(event);
         }
@@ -242,6 +231,10 @@ void DrawingArea::mousePressEvent(QMouseEvent *event)
 
 void DrawingArea::drawMouseLine(const QPoint &endPoint)
 {
+    if(this->_currentShape == "Pen")
+    {
+        toggleEraserMode();
+    }
     QPainter painter(&this->_image);
     painter.setPen(QPen(_penColor, _penWidth, Qt::SolidLine, Qt::RoundCap,
                         Qt::RoundJoin));
@@ -258,7 +251,8 @@ void DrawingArea::drawMouseLine(const QPoint &endPoint)
 
 void DrawingArea::mouseMoveEvent(QMouseEvent *event)
 {
-    if(this->isDrawing) {
+    if(this->isDrawing)
+    {
         drawMouseLine(event->pos());
     }
 }

@@ -35,6 +35,7 @@ public:
 
     void flip(bool horizontal, bool vertical);
     void rotate(qreal deg);
+    void toggleEraserMode();
     void drawEllipses(QMouseEvent *event);
     void drawRectangle(QMouseEvent *event);
     void ColorPicker(QMouseEvent *event);
