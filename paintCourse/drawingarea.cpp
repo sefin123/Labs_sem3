@@ -126,7 +126,7 @@ void DrawingArea::setCreateRectangle()
     this->_currentShape = "Rectangle";
 }
 
-void DrawingArea::setCreateLine()
+void DrawingArea::setColorPicker()
 {
     this->_currentShape = "ColorPicker";
 }
@@ -174,7 +174,6 @@ void DrawingArea::drawEllipses(QMouseEvent *event)
     QPainter painter(&this->_image);
     Ellipse ellipse(&this->_image, event->pos(), this->getPenWidth(), this->getPenColor());
     ellipse.draw(painter);
-
     update();
 }
 
@@ -184,7 +183,6 @@ void DrawingArea::drawRectangle(QMouseEvent *event)
     QPainter painter(&this->_image);
     Rectangle rect(&this->_image, event->pos(), this->getPenWidth(), this->getPenColor());
     rect.draw(painter);
-
     update();
 }
 
@@ -206,27 +204,10 @@ void DrawingArea::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        if(this->_currentShape == "Ellipse")
-        {
-            return this->drawEllipses(event);
-        }
-        if(this->_currentShape == "Rectangle")
-        {
-            return this->drawRectangle(event);
-        }
-        if(this->_currentShape == "ColorPicker")
-        {
-            return this->ColorPicker(event);
-        }
-        if(this->_currentShape == "FilledShape")
-        {
-            return this->fillShape(event);
-        }
         lastPoint = event->pos();
         this->isDrawing = true;
         _afterDrawingImage = _image.copy();
     }
-
 }
 
 void DrawingArea::drawMouseLine(const QPoint &endPoint)
@@ -261,11 +242,28 @@ void DrawingArea::mouseReleaseEvent(QMouseEvent *event)
 {
 
     if(event->button() == Qt::LeftButton && this->isDrawing) {
+
         this->isDrawing = false;
         lastPoint = event->pos();
         update();
 
         this->_undoStack->push(new DrawCommand(this, &this->_image, _afterDrawingImage, _image.copy()));
+        if(this->_currentShape == "Ellipse")
+        {
+            return this->drawEllipses(event);
+        }
+        if(this->_currentShape == "Rectangle")
+        {
+            return this->drawRectangle(event);
+        }
+        if(this->_currentShape == "ColorPicker")
+        {
+            return this->ColorPicker(event);
+        }
+        if(this->_currentShape == "FilledShape")
+        {
+            return this->fillShape(event);
+        }
     }
 }
 

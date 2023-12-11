@@ -1,8 +1,6 @@
 #ifndef DRAWCOMMAND_H
 #define DRAWCOMMAND_H
 
-#include "Shape.h"
-
 #include <QUndoCommand>
 #include <QWidget>
 

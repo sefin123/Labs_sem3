@@ -10,7 +10,6 @@ CONFIG += c++17
 
 SOURCES += \
     correctioncommand.cpp \
-    curve.cpp \
     drawcommand.cpp \
     drawingarea.cpp \
     ellipse.cpp \
@@ -18,17 +17,14 @@ SOURCES += \
     filtraringcommand.cpp \
     flipcommand.cpp \
     imagesizeexception.cpp \
-    line.cpp \
     main.cpp \
     mainwindow.cpp \
     rectangle.cpp \
     resizecommand.cpp \
-    rotatecommand.cpp \
     shape.cpp
 
 HEADERS += \
     correctioncommand.h \
-    curve.h \
     drawcommand.h \
     drawingarea.h \
     ellipse.h \
@@ -36,11 +32,9 @@ HEADERS += \
     filtraringcommand.h \
     flipcommand.h \
     imagesizeexception.h \
-    line.h \
     mainwindow.h \
     rectangle.h \
     resizecommand.h \
-    rotatecommand.h \
     shape.h
 
 FORMS += \

@@ -3,8 +3,6 @@
 
 #include <stdexcept>
 
-//using namespace std;
-
 namespace Draw
 {
 

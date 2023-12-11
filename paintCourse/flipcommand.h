@@ -1,8 +1,6 @@
 #ifndef FLIPCOMMAND_H
 #define FLIPCOMMAND_H
 
-#include "Shape.h"
-
 #include <QUndoCommand>
 #include <QWidget>
 

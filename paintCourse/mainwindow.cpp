@@ -244,8 +244,8 @@ void MainWindow::createDrawActionGruop()
     rectangleAct->setCheckable(true);
     rectangleAct->setActionGroup(&_drawActionGroup);
 
-    QAction *lineAct = new QAction(QIcon("D:/qt projects/paintCourse/icons/ColorPicker.ico"), "&Line");
-    connect(lineAct, SIGNAL(triggered()), _workingSpace, SLOT(setCreateLine()));
+    QAction *lineAct = new QAction(QIcon("D:/qt projects/paintCourse/icons/ColorPicker.ico"), "&ColorPicker");
+    connect(lineAct, SIGNAL(triggered()), _workingSpace, SLOT(setColorPicker()));
     lineAct->setCheckable(true);
     lineAct->setActionGroup(&_drawActionGroup);
 

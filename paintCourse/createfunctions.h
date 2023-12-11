@@ -5,7 +5,6 @@
 #include "Ellipse.h"
 #include "Rectangle.h"
 #include "Curve.h"
-#include "Line.h"
 #include "FilledShape.h"
 
 namespace Draw

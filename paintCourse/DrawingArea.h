@@ -51,7 +51,7 @@ public slots:
     void setCreatePen();
     void setCreateEllipse();
     void setCreateRectangle();
-    void setCreateLine();
+    void setColorPicker();
     void setCreateEraser();
     void setCreateFilledShape();
 
