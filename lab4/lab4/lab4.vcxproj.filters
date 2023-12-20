@@ -52,8 +52,10 @@
     <Text Include="test.txt">
       <Filter>Source Files</Filter>
     </Text>
-    <Text Include="testBin.bin">
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="testBin.bin">
       <Filter>Source Files</Filter>
-    </Text>
+    </None>
   </ItemGroup>
 </Project>

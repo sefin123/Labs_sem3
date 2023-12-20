@@ -2,27 +2,32 @@
 #include "Monoblock.h"
 
 int main() {
-    List<Monoblock> list;
-
+    List<int> list;
+    
     int menuValue = MAGICNUMBER;
     while (menuValue != EXIT) {
-        list.printList();
-        std::cout << "Size of list:" << list.getSize() << std::endl;
+
+        for (auto& element : list) {
+            std::cout << element << std::endl;
+        }
+
         menuShow();
 
         menuValue = enterWithValidationForScope(MAXMENUVALUE);
         system("cls");
         if (menuValue == 1) {
             std::cout << "Push front" << std::endl;
-            Monoblock value;
-            value.setMonoblockParametrs();
+            int value;
+            std::cout << "Enter value:" << std::endl;
+            std::cin >> value;
             list.pushFront(value); 
             list.writeListToFile();
         }
         if (menuValue == 2) {
             std::cout << "Push back" << std::endl;
-            Monoblock value;
-            value.setMonoblockParametrs();
+            int value;
+            std::cout << "Enter value:" << std::endl;
+            std::cin >> value;
             list.pushBack(value);
             list.writeListToFile();
         }
@@ -36,12 +41,23 @@ int main() {
         }
         try {
             if (menuValue == 5) {
-                int index;
-                std::cout << "Enter index" << std::endl;
-                std::cin >> index;
-                Monoblock number;
-                number = list.peek(index);
-                number.printMonoblock();
+                std::cout << "Enter number" << std::endl;
+                int number;
+                bool isFound;
+                std::cin >> number;
+                List<int>::iter start = list.begin();
+                List<int>::iter end = list.end();
+                try {
+                    if (isFound = list.search(start, end, number)) {
+                        std::cout << "Found" << std::endl;
+                    }
+                    else {
+                        std::cout << "Not found" << std::endl;
+                    }
+                }
+                catch (...) {
+                    std::cout << "something gone wrong." << std::endl;
+                }
             }
         }
         catch (std::exception& problem) {

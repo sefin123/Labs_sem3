@@ -6,7 +6,7 @@ void menuShow() {
 	std::cout << "2.Push back" << std::endl;
 	std::cout << "3.Pop front" << std::endl;
 	std::cout << "4.Pop back" << std::endl;
-	std::cout << "5.Peek" << std::endl;
+	std::cout << "5.Find data" << std::endl;
 	std::cout << "6.Clear list" << std::endl;
 	std::cout << "7.Read txt file" << std::endl;
 	std::cout << "8.Read bin file" << std::endl;

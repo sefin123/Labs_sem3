@@ -27,11 +27,69 @@ private:
     int size;
 
 public:
+
+    class Iterator {
+    private:
+        Node<T>* current;
+
+    public:
+        Iterator(Node<T>* node) : current(node) {}
+
+        T& operator*() {
+            return current->data;
+        }
+
+        Iterator& operator+(int value) {
+            for (int i = 0; i < value; i++) {
+                if (current->next == nullptr) {
+                    break;
+                }
+                current = current->next;
+            }
+            return *this;
+        }
+
+        Iterator& operator++() {
+            current = current->next;
+            return *this;
+        }
+
+        bool operator!=(const Iterator& other) const {
+            return current != other.current;
+        }
+
+        Iterator& operator--() {
+            current = current->prev;
+            return *this;
+        }
+    };
+
+    using iter = Iterator;
+
+    iter begin() {
+        return iter(head);
+    }
+
+    iter end() {
+        return iter(nullptr);
+    }
+
+
+    bool search(List<T>::iter start, List<T>::iter end, const T& value) {
+        for (auto it = start; start != end; ++it) {
+            if (*it == value) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     List() {
         head = nullptr;
         tail = nullptr;
         size = 0;
     }
+
     ~List() {
         while (head) {
             Node<T>* temp = head;
@@ -39,8 +97,6 @@ public:
             delete temp;
         }
     }
-
-
 
     void clearList() {
         if (isEmpty()) {
@@ -107,7 +163,7 @@ public:
 
     void popFront() {
         if (isEmpty()) {
-            std::cout << "List is empty!";
+            std::cout << "List is empty!" << std::endl;
             return;
         }
         Node<T>* temp = head;
@@ -151,16 +207,6 @@ public:
         return current->data;
     }
 
-    void printList() const {
-        std::cout << std::endl << "List:";
-        Node<T>* current = head;
-        while (current != nullptr) {
-            current->data.printMonoblock();
-            current = current->next;
-        }
-        std::cout << std::endl;
-    }
-
     void writeFromListToTXTFile() {
         std::ofstream file("test.txt");
         if (file.is_open()) {
@@ -170,7 +216,7 @@ public:
                 current = current->next;
             }
             file.close();
-            std::cout << "Write to file is completed " << std::endl;
+            
         }
         else {
             throw std::exception();
