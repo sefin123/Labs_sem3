@@ -26,12 +26,14 @@ int main() {
 			list.pop_front();
 		}
 		if (menuValue == 3) {
+			std::cout << "Resize" << std::endl;
 			int value;
 			std::cout << "Enter value" << std::endl;
 			std::cin >> value;
 			list.resize(value);
 		}
 		if (menuValue == 4) {
+			std::cout << "Assigh" << std::endl;
 			int value , n;
 			std::cout << "Enter n" << std::endl;
 			std::cin >> n;
@@ -40,6 +42,7 @@ int main() {
 			list.assign(n, value);
 		}
 		if (menuValue == 5) {
+			std::cout << "Emplace after" << std::endl;
 			int value , position;
 			std::cout << "Enter value" << std::endl;
 			std::cin >> value;
@@ -50,9 +53,11 @@ int main() {
 			list.emplace_after(it, value);
 		}
 		if (menuValue == 6) {
+			std::cout << "Clear list" << std::endl;
 			list.clear();
 		}
 		if (menuValue == 7) {
+			std::cout << "Find" << std::endl;
 			int value;
 			std::cout << "Enter value" << std::endl;
 			std::cin >> value;
